@@ -1,15 +1,15 @@
 import type { Displaceable, Fadable, Fade, Place, Shapable, Shape } from "../objects/measurements";
-import { merge } from "./functional";
+import { spread } from "./functional";
 
 export function resize( element: Shapable, size: Shape ): Shapable {
-	return merge( element, size )
+	return spread( element, size )
 }
 
 export function displace( element: Displaceable, position: Place ): Displaceable {
-	return merge( element, position )
+	return spread( element, position )
 }
 
 export function fade( element: Fadable, fade: Fade ): Fadable {
-	return merge( element, fade )
+	return spread( element, fade )
 
 }

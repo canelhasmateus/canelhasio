@@ -2,13 +2,10 @@ import type { ReferenceFrame } from "./position";
 import type { Form, Transparency } from "./properties";
 import type { Functor } from "./functors";
 
-export type Pixel = string
-export type Percentual = string
-export type Admensional = string
 
-export type Unit = Pixel | Percentual | Admensional
-export type Measurer = Functor<Unit, String>
-export type Conversor = Functor<Unit, Unit>
+export type Measurement = {  }
+export type Measurer = Functor<Measurement, String>
+export type Conversor = Functor<Measurement, Measurement>
 
 
 export type Place = ReferenceFrame

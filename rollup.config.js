@@ -31,21 +31,28 @@ function serve () {
 }
 
 export default {
-    input: 'src/main.ts',
+    input: { main : 'src/main.ts' },
     output: {
-        format: 'iife',
+        format: 'esm',
         name: 'canelhasio',
-        file: 'public/build/bundle.js',
-        sourcemap: !production
+
+        dir : 'public/build',
+        // file: 'public/build/bundle.js',
+        sourcemap: !production,
+
+
     },
     plugins: [
         svelte( {
             preprocess: sveltePreprocess(),
             compilerOptions: {
+                generate: 'dom',
+                // hydratable : true,
 
                 // enable run-time checks when not in production
                 dev: !production,
-                immutable: true
+                immutable: true,
+                // legacy: true
             }
         } ),
         // we'll extract any component CSS out into

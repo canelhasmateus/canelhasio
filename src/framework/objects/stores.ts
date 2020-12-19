@@ -1,14 +1,25 @@
 import type { Readable, Writable } from "svelte/store";
 import { get } from "svelte/store";
-import { merge } from "../../categories/morphisms/functional";
+import { mutate } from "../../categories/morphisms/functional";
+import fastdom from "fastdom";
 
 export type Store<T> = Readable<T> | Writable<T>
-export type StoreMapping<T, V> = ( store: Store<T> ) => ( data: V ) => void
 
 
-export function mergeStore<T>( store: Writable<T>, state: T ): void {
+export function updateStore<T>( store: Writable<T>, state: T ): void {
 
-	store?.set( merge( get( store ),
-					   state ) )
+	fastdom.mutate(
+		() => {
+			store?.set( mutate( readStore( store ),
+								state ) )
+		}
+	)
 
+}
+
+export function readStore<T>( store: Writable<T> ): T {
+
+	return fastdom.measure(
+		() => get( store )
+	)()
 }
