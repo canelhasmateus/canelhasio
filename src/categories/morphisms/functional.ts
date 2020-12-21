@@ -24,19 +24,19 @@ export function assign<T, V>( base: T, merger: V ): T & V {
 
 }
 
-export function mutate<T, V>( base: T, merger: V ): T & V {
+export function mutate<T>( base: T, merger: T ): T {
 
-	const newObj = {}
-
-	for ( const attrname in base ) {
-		// @ts-ignore
-		newObj[ attrname ] = base[ attrname ];
-	}
+	// const newObj = {}
+	//
+	// for ( const attrname in base ) {
+	// 	// @ts-ignore
+	// 	newObj[ attrname ] = base[ attrname ];
+	// }
 
 	for ( const attrname in merger ) {
 		// @ts-ignore
-		newObj[ attrname ] = merger[ attrname ];
+		base[ attrname ] = merger[ attrname ];
 	}
 
-	return newObj as T & V
+	return base as T
 }

@@ -7,57 +7,19 @@
 </svelte:head>
 <script lang='typescript'>
 
-	import type { Writable } from "svelte/store";
-	import { get, writable } from "svelte/store";
-	import type { Fade, Place, Shape } from "../../categories/objects/measurements";
-	import { defaultFadeIn, defaultFadeOut, defaultPosition, defaultShapeIn, defaultShapeOut, toPercent, toPixels, toTranslate } from "../objects/properties";
-	import { updateStore } from "../objects/stores";
-	import { mapValues } from "../../categories/morphisms/javascript";
-	import Canvas from "../components/Canvas.svelte"
-	import { spring } from "svelte/motion";
+	import { writable } from "svelte/store";
 
+	let styleList = Array( 100 ).fill( 0 )
+			.map( ( k, i ) => {
+				return writable( { x: 0, y: 8 * i + 75 } )
+			} )
 
-	const hoverTransparency: Writable<Fade> = writable( defaultFadeOut )
-	const hoverCoordinates: Writable<Place> = spring( defaultPosition )
-	const hoverSize: Writable<Shape>        = writable( defaultShapeIn )
+	let circle: HTMLElement
 
-	$: style = toTranslate( $hoverCoordinates )
-	function fillHover( event: MouseEvent ) {
+	function translate( node: HTMLElement ) {
 
-		updateStore( hoverTransparency,
-					 mapValues( toPercent,
-								defaultFadeIn ) )
-	}
-
-	function fadeHover( event: MouseEvent ) {
-		updateStore( hoverTransparency,
-					 mapValues( toPercent,
-								defaultFadeOut ) )
-	}
-
-	function increaseHover( event: MouseEvent ) {
-		updateStore( hoverSize,
-					 mapValues( toPixels,
-								defaultShapeOut )
-		)
-
-	}
-
-	function decreaseHover( event: MouseEvent ) {
-		updateStore( hoverSize,
-					 mapValues( toPixels,
-								defaultShapeIn )
-		)
-	}
-
-	function displaceHover( event: MouseEvent ) {
-
-		updateStore( hoverCoordinates,
-					 {
-						 x: event.x,
-						 y: event.y
-					 }
-		)
+		console.log( "aa" )
+		node.style.setProperty( "transform", "translate(500px,500px)" )
 
 	}
 
@@ -69,24 +31,22 @@
 
 	<div
 			class="flex-row flex-center"
-			on:mouseenter={ fillHover }
-			on:mouseleave={ fadeHover }
-			on:mousedown={ increaseHover }
-			on:mouseup={ decreaseHover }
-			on:mousemove={ displaceHover }
 	>
 
 		<h1>Coming Soon&trade</h1>
 
-		<Canvas>
-			<circle
-					{...$hoverTransparency}
-					{...$hoverSize}
-					style={style}
-			>
+		<svg>
+			{#each styleList as circleStore, index}
 
-			</circle>
-		</Canvas>
+				<circle
+						bind:this={circle}
+						on:mouseenter={ translate(circle) }
+						r={30}
+				>
+
+				</circle>
+			{/each}
+		</svg>
 
 	</div>
 </main>
@@ -103,15 +63,36 @@
 
 	}
 
+	@keyframes translate {
+		from {
+
+			transform: translate(0px , 0px);
+		}
+		to {
+			transform: translate(500px, 500px);
+		}
+
+	}
 
 	circle {
 		will-change: transform, opacity;
-		transition-property: opacity;
-		transition-duration: 300ms;
+		animation: translate 1s 0s alternate infinite;
 		position: absolute;
 		border-radius: 50%;
 		fill: #222;
 	}
 
+	svg {
+
+		contain: strict;
+		background-color: transparent;
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		z-index: -1;
+
+	}
 
 </style>

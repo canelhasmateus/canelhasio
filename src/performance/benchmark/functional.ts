@@ -27,6 +27,7 @@ let baseline = suite( "Functionals",
 					  } ),
 
 					  sampledAdd( "Mutate", () => {
+						  // @ts-ignore
 						  mutate( obj, another )
 					  } ),
 

@@ -2,10 +2,10 @@ import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
-import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import index from '@pathscale/rollup-plugin-tsickle';
+import closureCompiler from "@ampproject/rollup-plugin-closure-compiler";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -31,12 +31,12 @@ function serve () {
 }
 
 export default {
-    input: { main : 'src/main.ts' },
+    input: { main: 'src/main.ts' },
     output: {
         format: 'esm',
         name: 'canelhasio',
 
-        dir : 'public/build',
+        dir: 'public/build',
         // file: 'public/build/bundle.js',
         sourcemap: !production,
 
@@ -46,13 +46,12 @@ export default {
         svelte( {
             preprocess: sveltePreprocess(),
             compilerOptions: {
-                generate: 'dom',
                 // hydratable : true,
 
                 // enable run-time checks when not in production
                 dev: !production,
                 immutable: true,
-                // legacy: true
+
             }
         } ),
         // we'll extract any component CSS out into
@@ -69,10 +68,11 @@ export default {
             dedupe: [ 'svelte' ]
         } ),
         commonjs(),
-        typescript( {
-            sourceMap: !production,
-            inlineSources: !production
-        } ),
+        index(),
+        // typescript( {
+        //     sourceMap: !production,
+        //     inlineSources: !production
+        // } ),
 
         // In dev mode, call `npm run start` once
         // the bundle has been generated
@@ -84,7 +84,17 @@ export default {
 
         // If we're building for production (npm run build
         // instead of npm run dev), minify
-        production && terser()
+        production && closureCompiler( {
+            compilation_level: 'ADVANCED_OPTIMIZATIONS',
+            language_in: 'ECMASCRIPT_2020',
+            language_out: 'ECMASCRIPT_2015',
+            module_resolution: 'node',
+            jscomp_off: 'checkVars',
+            rewrite_polyfills: false,
+            warning_level: 'QUIET',
+            process_common_js_modules: true,
+        } ),
+
     ],
     watch: {
         clearScreen: false

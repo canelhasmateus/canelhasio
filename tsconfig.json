@@ -5,8 +5,7 @@
   "compilerOptions": {
 //    "module": "CommonJS",
 //    "esModuleInterop": true,
-//    "target": "ES6",
+    "target": "ES6",
 //    "moduleResolution": "Node",
-  },
-//  "lib": ["es2015"]
+  }
 }
