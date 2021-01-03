@@ -1,0 +1,19 @@
+{
+  "modules": {
+
+    "prefix": "dist/",
+    "out": "src/main.ts",
+    "compilerFlags" : {
+
+      "compilation_level": "ADVANCED_OPTIMIZATIONS",
+      "language_in": "ECMASCRIPT_2020",
+      "language_out": "ECMASCRIPT_2015",
+      "module_resolution": "node",
+      "jscomp_off": "checkVars",
+      "rewrite_polyfills": false,
+      "warning_level": "QUIET",
+      "process_common_js_modules": true
+    }
+
+  }
+}

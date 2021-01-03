@@ -6,6 +6,7 @@ import sveltePreprocess from 'svelte-preprocess';
 import css from 'rollup-plugin-css-only';
 import index from '@pathscale/rollup-plugin-tsickle';
 import closureCompiler from "@ampproject/rollup-plugin-closure-compiler";
+import typescript from "@rollup/plugin-typescript";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -68,11 +69,11 @@ export default {
             dedupe: [ 'svelte' ]
         } ),
         commonjs(),
-        index(),
-        // typescript( {
-        //     sourceMap: !production,
-        //     inlineSources: !production
-        // } ),
+
+        typescript( {
+            sourceMap: !production,
+            inlineSources: !production
+        } ),
 
         // In dev mode, call `npm run start` once
         // the bundle has been generated
@@ -84,6 +85,7 @@ export default {
 
         // If we're building for production (npm run build
         // instead of npm run dev), minify
+        // production && terser()
         production && closureCompiler( {
             compilation_level: 'ADVANCED_OPTIMIZATIONS',
             language_in: 'ECMASCRIPT_2020',

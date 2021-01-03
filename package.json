@@ -33,6 +33,7 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
+    "@tscc/tscc": "^0.6.2",
     "@types/node": "^14.14.12",
     "sirv-cli": "^1.0.0"
   }
