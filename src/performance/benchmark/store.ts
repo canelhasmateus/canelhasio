@@ -1,5 +1,5 @@
 import { add, complete, cycle, suite } from "benny";
-import { createPool } from "../../categories/morphisms/javascript";
+import { createPool } from "../../main/categories/morphisms/javascript";
 import { spring } from "svelte/motion";
 import { readable, writable } from "svelte/store";
 import { noop } from "svelte/internal";

@@ -1,5 +1,5 @@
 import { add, complete, cycle, suite } from "benny";
-import { assign, compose, identity, mutate, spread } from "../../categories/morphisms/functional";
+import { assign, compose, identity, mutate, spread } from "../../main/categories/morphisms/functional";
 
 const sampledAdd = ( name, test ) => {
 	return add( name, test, { minSamples: 100 } )

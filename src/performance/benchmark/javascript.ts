@@ -1,6 +1,6 @@
 import { add, complete, cycle, suite } from "benny";
-import { identity } from "../../categories/morphisms/functional";
-import { createPool, fromEntries, mapKeys, mapObject, mapValues } from "../../categories/morphisms/javascript";
+import { identity } from "../../main/categories/morphisms/functional";
+import { createPool, fromEntries, mapKeys, mapObject, mapValues } from "../../main/categories/morphisms/javascript";
 
 const sampledAdd  = ( name, test ) => {
 	return add( name, test, { minSamples: 100 } )

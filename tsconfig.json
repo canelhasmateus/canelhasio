@@ -1,12 +1,47 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": ["src/**/*", "node"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
-  "compilerOptions": {
-//    "module": "CommonJS",
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules/*",
+    "__sapper__/*",
+    "src/public/*"
+  ],
+
+//  "compilerOptions": {
+//
+//
+//    "lib": ["DOM"],
+//    "target": "es2017",
 //    "esModuleInterop": true,
-//    "target": "ES6",
-//    "moduleResolution": "Node",
-  },
-//  "lib": ["es2015"]
+//    "allowSyntheticDefaultImports": true,
+//    "importsNotUsedAsValues": "error",
+//    "emitDecoratorMetadata": true,
+//    "experimentalDecorators": true,
+//    "resolveJsonModule": true,
+//    "moduleResolution": "node",
+//    "sourceMap": true,
+//    "strict": true,
+//    "declaration": true,
+//    "module": "CommonJS",
+//
+//    //
+////    "lib": ["es6"],
+////    "types": ["node"],      // When you code for nodejs
+////    "target": "es6",
+////    "module": "commonjs",
+////    "esModuleInterop": true,
+//
+//
+////    "module": "esNext",
+////    "target": "esnext",
+////    "moduleResolution": "node"
+//
+//    //    "lib": ["es6"],
+//    //    "module": "commonjs",
+//    //    "esModuleInterop": true,
+//    //    "target": "ES6",
+//    //    "moduleResolution": "Node",
+//  }
 }

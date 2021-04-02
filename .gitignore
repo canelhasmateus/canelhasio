@@ -1,5 +1,5 @@
 /node_modules/
-/public/build/*
+/src/public/build/*
 /.vscode
 /.idea
 
