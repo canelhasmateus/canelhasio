@@ -1,17 +1,12 @@
-const svelte = require('@sveltejs/vite-plugin-svelte');
-const { defineConfig } = require('vite');
+import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 
-module.exports = defineConfig(({ command, mode }) => {
-	const isProduction = mode === 'production';
-	return {
-	    root: "./src",
+// https://vitejs.dev/config/
+export default defineConfig({
+	root: "./src",
 	    // base: "/",
-	    // publicDir: "../public",
-		plugins: [svelte()],
-		build: {
-			minify: isProduction,
-            // outDir: "../../dist",
+	publicDir: "./public",
 
-        }
-	};
-});
+	plugins: [svelte({ configFile: "../svelte.config.js"})]
+})
+

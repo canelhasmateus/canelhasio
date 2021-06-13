@@ -1,8 +1,7 @@
-// svelte.config.js
-const { typescript } = require('svelte-preprocess');
+const sveltePreprocess = require('svelte-preprocess')
 
 module.exports = {
-	preprocess: [typescript(
-        // { "tsconfigFile": "C:\\Users\\Lity\\Desktop\\workspace\\lity\\canelhasio\\packages\\tsconfig.json" }
-    )]
-};
+    // Consult https://github.com/sveltejs/svelte-preprocess
+    // for more information about preprocessors
+    preprocess: sveltePreprocess()
+}
