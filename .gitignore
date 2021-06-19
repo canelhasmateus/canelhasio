@@ -1,7 +1,6 @@
 /node_modules/
 /src/public/build/*
-/.vscode
 /.idea
-
+/dist
 .DS_Store
 /.secrets

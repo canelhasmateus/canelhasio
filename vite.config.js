@@ -6,7 +6,7 @@ export default defineConfig({
 	root: "./src",
 	    // base: "/",
 	publicDir: "./public",
-
-	plugins: [svelte({ configFile: "../svelte.config.js"})]
+	plugins: [svelte({ configFile: "../svelte.config.js"})] , 
+	build: { outDir: "../dist"}
 })
 
