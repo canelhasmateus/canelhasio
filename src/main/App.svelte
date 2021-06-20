@@ -25,6 +25,7 @@
 	$: style = toTranslate($hoverCoordinates);
 
 	function fillHover(event: MouseEvent) {
+		let a = toPercent( defaultShapeIn)
 		updateStore(hoverTransparency, mapValues(toPercent, defaultFadeIn));
 	}
 
@@ -58,7 +59,7 @@
 		on:mouseup={decreaseHover}
 		on:mousemove={displaceHover}
 	>
-		<h1>Luana é Linda</h1>
+		<h1>Coming Soon&trade</h1>
 
 		<Canvas>
 			<circle {...$hoverTransparency} {...$hoverSize} {style} />
